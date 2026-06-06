@@ -160,6 +160,46 @@ Aktueller öffentlicher Prüfstand danach:
 - `https://sauerlandaktuell.de/` liefert HTTP 200 und enthält `ca-pub-6440027702756215` sowie `pagead2.googlesyndication.com`.
 - Wiederholte Checks zeigten anschließend Cloudflare `MISS`, danach `HIT`, jeweils mit korrektem Inhalt.
 
+### `afd-im-netz.de` technischer AdSense-Stand am 2026-06-06
+
+Für `afd-im-netz.de` wurde ein MU-Plugin `adsense-setup.php` vorbereitet:
+
+- Es gibt den AdSense-Verknüpfungscode mit `ca-pub-6440027702756215` im HTML-Head aus.
+- Es liefert `/ads.txt` dynamisch mit `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0` aus.
+- Zusätzlich injiziert es den Prüfcode per Output-Buffer vor `</head>`, falls das Theme/Cache-Verhalten den normalen `wp_head`-Pfad nicht zuverlässig sichtbar macht.
+
+Geprüfter Stand:
+
+- `https://afd-im-netz.de/` liefert HTTP 200 und enthält `ca-pub-6440027702756215` sowie `pagead2.googlesyndication.com`.
+- `https://afd-im-netz.de/ads.txt` liefert HTTP 200 und die korrekte Google-Zeile.
+
+Policy-Hinweis: Die Seite bleibt wegen politisch sensibler Themen die riskanteste AdSense-Kandidatin. Die technische Vorbereitung ersetzt keine Google-Freigabe.
+
+### `afd-im-netz.de` Rechtstexte nachgezogen am 2026-06-06
+
+Die Live-WordPress-Seiten von `afd-im-netz.de` wurden direkt aktualisiert:
+
+- Datenschutzseite: `https://afd-im-netz.de/rechtliches/datenschutzerklaerung/`
+- Cookie-Richtlinie: `https://afd-im-netz.de/rechtliches/cookie-richtlinie/`
+
+Vorherige Inhalte wurden im Live-Verzeichnis gesichert unter:
+
+- `/home/chris/web/afd-im-netz.de/backups/adsense-legal-20260606/datenschutzerklaerung-before.html`
+- `/home/chris/web/afd-im-netz.de/backups/adsense-legal-20260606/cookie-richtlinie-before.html`
+
+Ergänzt/korrigiert wurde:
+
+- Google AdSense / Google Werbung inklusive Publisher-ID `pub-6440027702756215`
+- Google Analytics 4 mit `G-8QNYTLS937` statt alter ID `G-Q479JDDKHN`
+- Matomo unter `stats.sauerlandaktuell.de`, Site-ID `2`
+- Cookie-/Consent-Hinweis auf `afd_cookie_consent`
+- Stand der Rechtstexte auf `6. Juni 2026`
+
+Nach der Aktualisierung wurden WordPress-Cache und Cloudflare-Zone geleert. Öffentliche Prüfung am 2026-06-06:
+
+- Datenschutzseite lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `G-8QNYTLS937`, `stats.sauerlandaktuell.de`, Site-ID `2` und `Stand: 6. Juni 2026`.
+- Cookie-Richtlinie lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `G-8QNYTLS937`, `_ga_8QNYTLS937` und `Stand: 6. Juni 2026`.
+
 ### Reihenfolge
 
 1. `sauerlandaktuell.de` – zuerst testen
@@ -168,7 +208,7 @@ Aktueller öffentlicher Prüfstand danach:
 
 ### Gemeinsame technische Befunde
 
-- `ads.txt` ist für `sauerlandaktuell.de` und `darkandalternativeworld.de` eingerichtet; für `afd-im-netz.de` fehlt es noch.
+- `ads.txt` ist für `sauerlandaktuell.de`, `darkandalternativeworld.de` und `afd-im-netz.de` eingerichtet.
 - Impressum, Datenschutz und Cookie-Seiten sind grundsätzlich vorhanden.
 - GA4 und Matomo sind laut Projektstand consent-gated eingebunden.
 - Search Console ist dokumentiert vorhanden.
@@ -353,7 +393,7 @@ Risiken:
 
 ### Öffentliche Checks
 
-- `/ads.txt`: fehlt aktuell (`404`).
+- `/ads.txt`: eingerichtet und öffentlich erreichbar.
 - Datenschutzseite vorhanden: `https://afd-im-netz.de/rechtliches/datenschutzerklaerung/`
 - Cookie-Richtlinie vorhanden: `https://afd-im-netz.de/rechtliches/cookie-richtlinie/`
 - Impressum ist in der Navigation erreichbar.
@@ -368,10 +408,10 @@ Risiken:
 
 ### Vor AdSense-Freigabe erledigen
 
-- [ ] GA4-ID in Datenschutz/Cookie-Richtlinie aktualisieren.
-- [ ] AdSense/Google Werbung ergänzen, falls die Seite überhaupt monetarisiert werden soll.
-- [ ] Publisher-ID klären.
-- [ ] `ads.txt` einrichten.
+- [x] GA4-ID in Datenschutz/Cookie-Richtlinie aktualisieren: `G-8QNYTLS937`.
+- [x] AdSense/Google Werbung ergänzen.
+- [x] Publisher-ID klären: `pub-6440027702756215`.
+- [x] `ads.txt` einrichten.
 - [ ] Redaktionelle Linie prominent erklären: Dokumentation, Analyse, Faktencheck.
 - [ ] Anzeigen nicht auf besonders sensiblen Artikeln starten.
 - [ ] Erst nach Erfahrungen mit den anderen Seiten testen.
