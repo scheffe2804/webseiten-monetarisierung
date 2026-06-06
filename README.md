@@ -24,3 +24,4 @@ Erste Hypothese: Werbung kann eine Einnahmequelle sein, sollte aber nicht pausch
 - [`werbepreise.md`](werbepreise.md) – Entwurf für Anzeigenpakete und Preise
 - [`umsetzung.md`](umsetzung.md) – konkrete nächste technische und organisatorische Schritte
 - [`google-zugriff.md`](google-zugriff.md) – dauerhaft übernommene Google-/Tracking-Informationen aus `/home/chris/web/diverses`
+- [`adsense-checkliste.md`](adsense-checkliste.md) – AdSense-Zugriff, Voraussetzungen, Seitenprüfung und nächster Arbeitsplan
