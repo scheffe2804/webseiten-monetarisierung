@@ -80,6 +80,50 @@ Technischer Umsetzungsstand:
 
 Wichtig: Dies ist zunächst der AdSense-Verknüpfungs-/Prüfcode. Datenschutz-/Cookie-Texte und spätere Anzeigenkonfiguration müssen noch sauber nachgezogen werden.
 
+### `darkandalternativeworld.de` technischer AdSense-Stand am 2026-06-06
+
+Für `darkandalternativeworld.de` wurde analog ein MU-Plugin `adsense-setup.php` vorbereitet:
+
+- Es gibt den AdSense-Verknüpfungscode mit `ca-pub-6440027702756215` im HTML-Head aus.
+- Es liefert `/ads.txt` dynamisch mit `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0` aus.
+- Zusätzlich injiziert es den Prüfcode per Output-Buffer vor `</head>`, falls das Theme/Cache-Verhalten den normalen `wp_head`-Pfad nicht zuverlässig sichtbar macht.
+
+Geprüfter Stand nach Runtime-Klärung:
+
+- Das öffentliche `https://darkandalternativeworld.de/` enthält `ca-pub-6440027702756215` und `pagead2.googlesyndication.com`.
+- `https://darkandalternativeworld.de/?adsense_live_check=20260606` enthält ebenfalls den AdSense-Code.
+- `https://darkandalternativeworld.de/ads.txt` liefert HTTP 200 und die korrekte Google-Zeile.
+- Lokaler Origin-Check muss mit `X-Forwarded-Proto: https` erfolgen; ohne diesen Header antwortet WordPress mit einem 301-Redirect auf HTTPS und kein HTML-Body wird geprüft.
+
+Noch offen für `darkandalternativeworld.de`:
+
+- Das neue MU-Plugin ist im Staging-/Live-Repo noch als untracked Datei vorhanden und muss nach Freigabe sauber gemäß Release-Modell committed werden.
+
+### `darkandalternativeworld.de` Rechtstexte nachgezogen am 2026-06-06
+
+Die Live-WordPress-Seiten von `darkandalternativeworld.de` wurden nach Nutzerfreigabe direkt aktualisiert:
+
+- Datenschutzseite: `https://darkandalternativeworld.de/rechtliches/datenschutzerklaerung/`
+- Cookie-Richtlinie: `https://darkandalternativeworld.de/rechtliches/cookie-richtlinie/`
+
+Vorherige Inhalte wurden im Live-Verzeichnis gesichert unter:
+
+- `/home/chris/web/darkandalternativeworld.de/backups/adsense-legal-20260606/datenschutzerklaerung-before.html`
+- `/home/chris/web/darkandalternativeworld.de/backups/adsense-legal-20260606/cookie-richtlinie-before.html`
+
+Ergänzt/korrigiert wurde:
+
+- Google AdSense / Google Werbung inklusive Publisher-ID `pub-6440027702756215`
+- Google Analytics 4 mit `G-END9E0M1V7`
+- Matomo unter `stats.sauerlandaktuell.de`, Site-ID `4`
+- Cookie-/Consent-Hinweis auf `afd_cookie_consent`
+- Stand der Rechtstexte auf `6. Juni 2026`
+
+Nach der Aktualisierung wurden WordPress-Cache und Cloudflare-Zone geleert. Öffentliche Prüfung am 2026-06-06:
+
+- Datenschutzseite lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `G-END9E0M1V7`, `stats.sauerlandaktuell.de`, Site-ID `4` und `Stand: 6. Juni 2026`.
+- Cookie-Richtlinie lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `G-END9E0M1V7`, `_ga_END9E0M1V7` und `Stand: 6. Juni 2026`.
+
 ### Rechtstexte nachgezogen am 2026-06-06
 
 Die Live-WordPress-Seiten von `sauerlandaktuell.de` wurden per WP-CLI aktualisiert:
@@ -106,15 +150,25 @@ Ergänzt/korrigiert wurde:
 - Datenschutzseite lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `G-CR8ETZEYRB` und `Stand: 6. Juni 2026`.
 - Cookie-Richtlinie lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `cmplz_` und `Stand: 6. Juni 2026`.
 
+### `sauerlandaktuell.de` Nachprüfung am 2026-06-06, 17:40 CEST
+
+Nach der AdSense-Anzeige `Nicht gefunden` wurde öffentlich erneut geprüft. Dabei waren `/ads.txt` und AdSense-Code kurzfristig nicht mehr öffentlich sichtbar; vermutlich wurde das Live-`wp-content` zwischenzeitlich durch einen Promote/Sync-Stand ohne Live-Datei überschrieben. Das MU-Plugin wurde erneut nach Live kopiert und Cloudflare vollständig gepurgt.
+
+Aktueller öffentlicher Prüfstand danach:
+
+- `https://sauerlandaktuell.de/ads.txt` liefert HTTP 200 und `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0`.
+- `https://sauerlandaktuell.de/` liefert HTTP 200 und enthält `ca-pub-6440027702756215` sowie `pagead2.googlesyndication.com`.
+- Wiederholte Checks zeigten anschließend Cloudflare `MISS`, danach `HIT`, jeweils mit korrektem Inhalt.
+
 ### Reihenfolge
 
 1. `sauerlandaktuell.de` – zuerst testen
-2. `darkandalternativeworld.de` – danach, aber vorher Datenschutz/Cookie-Texte aktualisieren
+2. `darkandalternativeworld.de` – technische AdSense-Verknüpfung vorbereitet; vor finaler Freigabe Rechtstexte aktualisieren
 3. `afd-im-netz.de` – nur später und vorsichtig wegen politisch sensibler Inhalte
 
 ### Gemeinsame technische Befunde
 
-- `ads.txt` fehlt aktuell auf allen drei Domains (`/ads.txt` liefert 404).
+- `ads.txt` ist für `sauerlandaktuell.de` und `darkandalternativeworld.de` eingerichtet; für `afd-im-netz.de` fehlt es noch.
 - Impressum, Datenschutz und Cookie-Seiten sind grundsätzlich vorhanden.
 - GA4 und Matomo sind laut Projektstand consent-gated eingebunden.
 - Search Console ist dokumentiert vorhanden.
@@ -197,7 +251,7 @@ Gründe:
 
 ### Öffentliche Checks
 
-- `/ads.txt`: fehlt aktuell (`404`).
+- `/ads.txt`: eingerichtet und öffentlich erreichbar.
 - Datenschutzseite vorhanden: `https://sauerlandaktuell.de/datenschutzerklaerung/`
 - Cookie-Richtlinie vorhanden: `https://sauerlandaktuell.de/cookie-richtlinie/`
 - Impressum ist in der Navigation erreichbar.
@@ -213,7 +267,7 @@ Gründe:
 ### Vor AdSense-Freigabe erledigen
 
 - [ ] AdSense-Konto/Publisher-ID klären.
-- [ ] `ads.txt` mit Publisher-ID einrichten.
+- [x] `ads.txt` mit Publisher-ID einrichten.
 - [ ] Datenschutzerklärung um Google AdSense/Google Werbung ergänzen.
 - [ ] Cookie-Richtlinie um Werbe-Cookies/AdSense ergänzen.
 - [ ] Cookie-Richtlinie auf korrektes Sauerland-Consent-System prüfen (`cmplz_...` statt `afd_cookie_consent`, falls zutreffend).
@@ -251,7 +305,7 @@ Risiken:
 
 ### Öffentliche Checks
 
-- `/ads.txt`: fehlt aktuell (`404`).
+- `/ads.txt`: eingerichtet und öffentlich erreichbar.
 - Datenschutzseite vorhanden: `https://darkandalternativeworld.de/rechtliches/datenschutzerklaerung/`
 - Cookie-Richtlinie vorhanden: `https://darkandalternativeworld.de/rechtliches/cookie-richtlinie/`
 - Impressum ist in der Navigation erreichbar.
@@ -269,8 +323,9 @@ Risiken:
 - [ ] Datenschutzseite auf tatsächliche GA4-/Matomo-Einbindung aktualisieren.
 - [ ] Cookie-Richtlinie auf tatsächliche GA4-/Matomo-Einbindung aktualisieren.
 - [ ] AdSense/Google Werbung ergänzen.
-- [ ] Publisher-ID klären.
-- [ ] `ads.txt` einrichten.
+- [x] Publisher-ID klären: `pub-6440027702756215`.
+- [x] `ads.txt` einrichten.
+- [x] Datenschutzseite und Cookie-Richtlinie aktualisieren.
 - [ ] Bildrechte/Pressebilder prüfen.
 - [ ] Eigene Bandporträts/Festivalübersichten stärker hervorheben.
 - [ ] Erst nach Sauerland-Erfahrung anmelden/testen.
