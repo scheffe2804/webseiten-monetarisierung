@@ -80,6 +80,32 @@ Technischer Umsetzungsstand:
 
 Wichtig: Dies ist zunächst der AdSense-Verknüpfungs-/Prüfcode. Datenschutz-/Cookie-Texte und spätere Anzeigenkonfiguration müssen noch sauber nachgezogen werden.
 
+### Rechtstexte nachgezogen am 2026-06-06
+
+Die Live-WordPress-Seiten von `sauerlandaktuell.de` wurden per WP-CLI aktualisiert:
+
+- Datenschutzseite: `https://sauerlandaktuell.de/datenschutzerklaerung/`
+- Cookie-Richtlinie: `https://sauerlandaktuell.de/cookie-richtlinie/`
+
+Vorherige Inhalte wurden auf dem Live-Host gesichert unter:
+
+- `/home/chris/web/sauerlandaktuell.de/backups/adsense-legal-20260606/datenschutzerklaerung-before.html`
+- `/home/chris/web/sauerlandaktuell.de/backups/adsense-legal-20260606/cookie-richtlinie-before.html`
+
+Ergänzt/korrigiert wurde:
+
+- Google AdSense / Google Werbung inklusive Publisher-ID `pub-6440027702756215`
+- Google Analytics 4 mit `G-CR8ETZEYRB`
+- Matomo unter `stats.sauerlandaktuell.de`
+- Cookie-/Consent-Hinweis auf `cmplz_` statt falsch erwähntem `afd_cookie_consent`
+- Google-CMP-/Consent-Hinweis
+- Stand der Rechtstexte auf `6. Juni 2026`
+
+Öffentliche Prüfung am 2026-06-06:
+
+- Datenschutzseite lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `G-CR8ETZEYRB` und `Stand: 6. Juni 2026`.
+- Cookie-Richtlinie lieferte HTTP 200 und enthielt `Google AdSense`, `pub-6440027702756215`, `cmplz_` und `Stand: 6. Juni 2026`.
+
 ### Reihenfolge
 
 1. `sauerlandaktuell.de` – zuerst testen
