@@ -23,3 +23,4 @@ Erste Hypothese: Werbung kann eine Einnahmequelle sein, sollte aber nicht pausch
 - [`rechtliches.md`](rechtliches.md) – Datenschutz, Impressum, Kennzeichnung, politische Sensibilität
 - [`werbepreise.md`](werbepreise.md) – Entwurf für Anzeigenpakete und Preise
 - [`umsetzung.md`](umsetzung.md) – konkrete nächste technische und organisatorische Schritte
+- [`google-zugriff.md`](google-zugriff.md) – dauerhaft übernommene Google-/Tracking-Informationen aus `/home/chris/web/diverses`
