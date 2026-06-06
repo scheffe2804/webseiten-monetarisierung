@@ -18,9 +18,9 @@ Bekannt/dokumentiert ist:
 
 Nicht bekannt/dokumentiert ist:
 
-- ob ein Google-AdSense-Konto existiert
+- ob ein Google-AdSense-Konto existiert: inzwischen durch Nutzerstart im Browser praktisch bestätigt
 - ob die drei Seiten in AdSense angelegt sind
-- ob eine AdSense-Publisher-ID existiert (`pub-...`)
+- ob eine AdSense-Publisher-ID existiert (`pub-...`): inzwischen bekannt, siehe unten
 - ob eine AdSense-Freigabe, Ablehnung oder Policy-Meldung existiert
 - ob AdSense-API-Scopes vorhanden sind
 
@@ -53,6 +53,32 @@ Nicht zuverlässig per API ersetzbar:
 Darum kommt der echte AdSense-Konto-/Freigabecheck wahrscheinlich als separater Schritt.
 
 ## Gesamtbefund
+
+## AdSense-Bestand nach Nutzerangabe vom 2026-06-06
+
+Der Nutzer hat in der AdSense-Oberfläche den Website-Verknüpfungscode für `sauerlandaktuell.de` erhalten:
+
+```html
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6440027702756215"
+     crossorigin="anonymous"></script>
+```
+
+Daraus abgeleitet:
+
+- Publisher-ID: `pub-6440027702756215`
+- AdSense Client-ID: `ca-pub-6440027702756215`
+- `ads.txt`-Zeile: `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0`
+
+Technischer Umsetzungsstand:
+
+- Auf `sauerlandaktuell.de` wurde ein kleines MU-Plugin `adsense-setup.php` vorbereitet/ausgerollt.
+- Es gibt den AdSense-Verknüpfungscode im HTML-Head aus.
+- Es liefert `/ads.txt` mit der korrekten Google-Zeile aus.
+- Öffentliche Prüfung am 2026-06-06:
+  - `https://sauerlandaktuell.de/?adsense_check=...` enthielt `ca-pub-6440027702756215` und `pagead2.googlesyndication.com/pagead/js/adsbygoogle.js`.
+  - `https://sauerlandaktuell.de/ads.txt` lieferte HTTP 200 und `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0`.
+
+Wichtig: Dies ist zunächst der AdSense-Verknüpfungs-/Prüfcode. Datenschutz-/Cookie-Texte und spätere Anzeigenkonfiguration müssen noch sauber nachgezogen werden.
 
 ### Reihenfolge
 
