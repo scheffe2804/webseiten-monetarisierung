@@ -135,3 +135,18 @@ Hinweis:
   - `pagead_url_count: 0`.
 
 Bewertung: Sauerland-AdSense ist öffentlich live, `ads.txt` ist korrekt, und ohne Marketing-Consent wird öffentlich kein AdSense-Script geladen.
+
+## 2026-06-10 – Status Dark/AFD nach Sauerland-Rollout
+
+Korrektur/Abgrenzung nach Nutzerhinweis:
+
+- `darkandalternativeworld.de` ist noch **nicht** durch die AdSense-Prüfung.
+- `afd-im-netz.de` ist noch **nicht** durch die AdSense-Prüfung.
+- Deshalb aktuell **kein** Live-Rollout und keine Aktivierung von AdSense-Anzeigen auf Dark oder AFD.
+- Eine kurz begonnene, nicht committed/gepushte Staging-Änderung im Dark-Repo wurde zurückgenommen.
+
+Nächster sinnvoller Schritt für Dark/AFD ist nur Vorbereitung:
+
+- AdSense-Status in der Google-Oberfläche abwarten bzw. prüfen.
+- Bei Freigabe zuerst wie bei Sauerland nur in Staging consent-gated vorbereiten.
+- Für `afd-im-netz.de` wegen politisch sensibler Inhalte weiterhin besonders vorsichtig bleiben und keine automatische Übernahme des Sauerland-Modells ohne separate Policy-Prüfung.
