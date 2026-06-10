@@ -140,8 +140,8 @@ Bewertung: Sauerland-AdSense ist öffentlich live, `ads.txt` ist korrekt, und oh
 
 Korrektur/Abgrenzung nach Nutzerhinweis:
 
-- `darkandalternativeworld.de` ist noch **nicht** durch die AdSense-Prüfung.
-- `afd-im-netz.de` ist noch **nicht** durch die AdSense-Prüfung.
+- `darkandalternativeworld.de` ist noch **nicht** durch die AdSense-Prüfung, aber auch **nicht abgelehnt**; Status: in Prüfung.
+- `afd-im-netz.de` ist noch **nicht** durch die AdSense-Prüfung, aber auch **nicht abgelehnt**; Status: in Prüfung.
 - Deshalb aktuell **kein** Live-Rollout und keine Aktivierung von AdSense-Anzeigen auf Dark oder AFD.
 - Eine kurz begonnene, nicht committed/gepushte Staging-Änderung im Dark-Repo wurde zurückgenommen.
 
@@ -150,3 +150,17 @@ Nächster sinnvoller Schritt für Dark/AFD ist nur Vorbereitung:
 - AdSense-Status in der Google-Oberfläche abwarten bzw. prüfen.
 - Bei Freigabe zuerst wie bei Sauerland nur in Staging consent-gated vorbereiten.
 - Für `afd-im-netz.de` wegen politisch sensibler Inhalte weiterhin besonders vorsichtig bleiben und keine automatische Übernahme des Sauerland-Modells ohne separate Policy-Prüfung.
+
+## 2026-06-10 – Anzeigenkonfiguration nach Sauerland-Freigabe
+
+Auf `sauerlandaktuell.de` ist technisch aktuell der AdSense-Seitencode consent-gated eingebunden. Ob Anzeigen automatisch erscheinen, hängt von der AdSense-Konfiguration ab:
+
+- Wenn in AdSense für `sauerlandaktuell.de` **Automatische Anzeigen / Auto Ads** aktiviert sind, kann Google nach Marketing-Consent automatisch Anzeigenplätze ausspielen.
+- Wenn Auto Ads **nicht** aktiviert sind, lädt zwar der AdSense-Code nach Consent, aber es erscheinen ohne manuell angelegte Anzeigenblöcke/Placements voraussichtlich keine oder kaum sichtbare Anzeigen.
+
+Empfehlung für den Start:
+
+- In AdSense für `sauerlandaktuell.de` Auto Ads prüfen.
+- Falls Auto Ads aktiviert werden: zunächst moderat starten und mobil/desktop kontrollieren.
+- Alternativ oder zusätzlich später 1–2 manuelle Anzeigenplätze testen, z. B. unter dem ersten Absatz und am Artikelende.
+- Nach 7–14 Tagen erste Werte dokumentieren: Impressionen, Seiten-RPM, Einnahmen, Policy-Warnungen.
