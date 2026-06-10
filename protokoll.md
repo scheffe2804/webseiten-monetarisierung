@@ -88,3 +88,35 @@ Noch offen vor Live-Rollout:
 - Test ohne Marketing-Consent: kein AdSense-Netzwerkrequest.
 - Test nach Marketing-Consent: AdSense-Script wird geladen.
 - Danach Entscheidung über Commit/Push und späteren Release nach Live.
+
+## 2026-06-10 – AdSense-Live-Rollout sauerlandaktuell.de
+
+Der Staging-Stand wurde nach Live released.
+
+Technische Release-Commits im Sauerland-Repo:
+
+- `4c131a4` – AdSense-Laden hinter Marketing-Consent gelegt.
+- `73de2db` – `ads.txt` in Staging-Compose korrekt gemountet.
+- `5860e6a` – AdSense-Setup auch auf `staging.sauerlandaktuell.de` erlaubt, damit Staging testbar ist.
+- `1213a71` – AdSense darf nur bei tatsächlich vorhandenem `cmplz_marketing=allow` laden.
+- `c6ecfa9` – Merge-Commit nach `main`: `Merge dev: consent-gated AdSense release`.
+
+Live-Rollout:
+
+- `origin/main` wurde auf `c6ecfa9` gepusht.
+- Live-Cron/Deploy hat den Live-Checkout auf `c6ecfa9` aktualisiert.
+- Live-Container laufen weiterhin auf Port `30000`.
+
+Live-Prüfungen:
+
+- `https://sauerlandaktuell.de/ads.txt` bzw. lokaler Check auf `m00h` liefert HTTP 200 mit `Content-Length: 59` und exakt:
+  `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0`
+- Live-HTML enthält den `Consent-gated Google AdSense loader`.
+- Automatisierter Chromium-Test gegen Live-Port `30000`:
+  - Ohne Marketing-Consent: kein dynamischer AdSense-Script-Tag, `pagead_url_count: 0`.
+  - Mit `cmplz_marketing=allow`: dynamischer AdSense-Script-Tag vorhanden, `pagead_url_count: 1`.
+  - Ergebnis: `without_consent_ok: True`, `with_consent_ok: True`.
+
+Hinweis:
+
+- Nach dem Live-Deploy zeigte der Live-Worktree gelöschte Dateien unter `wp-content/upgrade/wordpress-6.9.1-de_de/...` als offene Änderungen. Das betrifft WordPress-Upgrade-Temporärdateien und nicht den AdSense-Release-Diff. Sollte separat bereinigt bzw. in `.gitignore`/Deploy-Hygiene geprüft werden.
