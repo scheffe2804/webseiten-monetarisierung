@@ -192,3 +192,24 @@ Live-Verifikation:
   - Mobile `390x844`: Banner sichtbar, `top: 390`, `bottom: 834`, `visible: true`.
 
 Bewertung: Consent-Banner ist öffentlich wieder sichtbar; Nutzer kann Marketing-Consent geben, danach kann der consent-gated AdSense-Loader Anzeigen laden.
+
+## 2026-06-10 – Header-Textfarbe sauerlandaktuell.de angepasst
+
+Auf Nutzerwunsch wurden Seitentitel und Unterzeile im Header weiß mit leichtem weißem Schatten gestaltet:
+
+- `Das Sauerland im Netz`
+- `Aktuelle Nachrichten, Einordnung und Hintergründe aus dem Sauerland.`
+
+Technische Änderung im Sauerland-Repo:
+
+- `04f4ccb` – `Style Sauerland site title in white`
+- `17a4d89` – Merge nach `main`: `Merge dev: white Sauerland site title`
+
+Live-Verifikation:
+
+- Live-Cron hat `main` auf `17a4d89` aktualisiert.
+- Öffentlicher CSS-Check enthält die neue Regel für `.mg-headwidget .site-branding-text .site-title a` und `.site-description`.
+- Chromium-Computed-Style:
+  - Titel-Farbe: `rgb(255, 255, 255)`
+  - Unterzeile-Farbe: `rgb(255, 255, 255)`
+  - Textschatten: weißer Schatten mit `0 0 6px` und `0 1px 2px`.
