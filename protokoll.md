@@ -120,3 +120,18 @@ Live-Prüfungen:
 Hinweis:
 
 - Nach dem Live-Deploy zeigte der Live-Worktree gelöschte Dateien unter `wp-content/upgrade/wordpress-6.9.1-de_de/...` als offene Änderungen. Das betrifft WordPress-Upgrade-Temporärdateien und nicht den AdSense-Release-Diff. Sollte separat bereinigt bzw. in `.gitignore`/Deploy-Hygiene geprüft werden.
+
+## 2026-06-10 – Öffentliche Nachprüfung sauerlandaktuell.de
+
+Öffentliche Checks nach dem Live-Rollout:
+
+- `https://sauerlandaktuell.de/ads.txt` liefert öffentlich HTTP 200, `content-type: text/plain`, `content-length: 59` und exakt:
+  `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0`
+- `https://sauerlandaktuell.de/` liefert öffentlich HTTP 200 und enthält den `Consent-gated Google AdSense loader`.
+- Öffentlicher Chromium-Check ohne vorhandenen Consent:
+  - Seitentitel: `Das Sauerland im Netz - Nachrichten aus dem Sauerland`
+  - Loader-Kommentar vorhanden.
+  - Kein dynamischer AdSense-Script-Tag.
+  - `pagead_url_count: 0`.
+
+Bewertung: Sauerland-AdSense ist öffentlich live, `ads.txt` ist korrekt, und ohne Marketing-Consent wird öffentlich kein AdSense-Script geladen.
