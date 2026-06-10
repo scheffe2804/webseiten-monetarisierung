@@ -164,3 +164,31 @@ Empfehlung für den Start:
 - Falls Auto Ads aktiviert werden: zunächst moderat starten und mobil/desktop kontrollieren.
 - Alternativ oder zusätzlich später 1–2 manuelle Anzeigenplätze testen, z. B. unter dem ersten Absatz und am Artikelende.
 - Nach 7–14 Tagen erste Werte dokumentieren: Impressionen, Seiten-RPM, Einnahmen, Policy-Warnungen.
+
+## 2026-06-10 – Consent-Banner-Sichtbarkeit sauerlandaktuell.de repariert
+
+Nutzer meldete, dass in Chrome/Edge/Inkognito kein Consent-Banner sichtbar ist und daher auch keine Ads erscheinen.
+
+Prüfung:
+
+- Banner war im HTML/DOM vorhanden und hatte `cmplz-show`.
+- Auf Desktop lag der Banner aber außerhalb des sichtbaren Viewports:
+  - Viewport-Höhe: `900px`
+  - Banner `top`: ca. `1125px`
+  - Banner `bottom`: ca. `1340px`
+- Ursache: CSS-Positionierung ließ den Complianz-Banner auf Desktop unter den Viewport rutschen.
+
+Fix im Sauerland-Repo:
+
+- `c0f19ee` – `Keep Complianz banner visible on desktop`
+- `d965093` – Merge nach `main`: `Merge dev: Complianz banner visibility fix`
+- Ergänzte CSS-Regel in `wp-content/themes/newstack/style.css` setzt für `.cmplz-cookiebanner.cmplz-show` explizit `top: auto`, `bottom: 10px`, `left/right: 10px`, `max-height: calc(100dvh - 20px)` und `overflow: auto`.
+
+Live-Verifikation:
+
+- Live-Cron hat `main` auf `d965093` aktualisiert.
+- Öffentlicher Puppeteer/Chromium-Test:
+  - Desktop `1365x900`: Banner sichtbar, `top: 675`, `bottom: 890`, `visible: true`.
+  - Mobile `390x844`: Banner sichtbar, `top: 390`, `bottom: 834`, `visible: true`.
+
+Bewertung: Consent-Banner ist öffentlich wieder sichtbar; Nutzer kann Marketing-Consent geben, danach kann der consent-gated AdSense-Loader Anzeigen laden.
