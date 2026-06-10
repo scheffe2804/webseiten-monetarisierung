@@ -213,3 +213,20 @@ Live-Verifikation:
   - Titel-Farbe: `rgb(255, 255, 255)`
   - Unterzeile-Farbe: `rgb(255, 255, 255)`
   - Textschatten: weißer Schatten mit `0 0 6px` und `0 1px 2px`.
+
+## 2026-06-10 – Header-Textfarbe sauerlandaktuell.de auf Hellgrün angepasst
+
+Auf Nutzerwunsch wurde die zuvor weiße Header-Textfarbe auf ein helles Grün passend zur Seitenfarbe umgestellt.
+
+Technische Änderung im Sauerland-Repo:
+
+- `dbf5498` – `Use light green Sauerland site title`
+- `cbd880d` – Merge nach `main`: `Merge dev: light green Sauerland site title`
+
+Live-Verifikation:
+
+- Live-Cron hat `main` auf `cbd880d` aktualisiert.
+- Chromium-Computed-Style:
+  - Titel-Farbe: `rgb(185, 247, 207)` (`#b9f7cf`)
+  - Unterzeile-Farbe: `rgb(185, 247, 207)` (`#b9f7cf`)
+  - Textschatten: hellgrüner Schatten mit zusätzlichem leicht weißem Schatten.
