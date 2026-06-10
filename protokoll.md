@@ -64,3 +64,27 @@ Hinweis: AdSense kann einige Tage brauchen, bis die Datei erneut gecrawlt und di
 
 ## 2026-06-10 – AdSense-Status sauerlandaktuell.de
 AdSense-Warnung für `sauerlandaktuell.de` wurde als erledigt/akzeptiert gemeldet. Monetarisierung für diese Seite ist damit im ersten Schritt aktiv.
+
+## 2026-06-10 – AdSense-Staging-Umbau sauerlandaktuell.de
+
+Repo-Trennung geklärt:
+
+- `/home/chris/web/webseiten-monetarisierung` bleibt Planungs-/Doku-Repo.
+- `/home/chris/web/staging.sauerlandaktuell.de` ist die aktive Entwicklungsumgebung für technische Änderungen an `sauerlandaktuell.de`.
+- `/home/chris/web/sauerlandaktuell.de` ist Live und soll laut Projektregeln nicht direkt geändert werden.
+
+Technischer Stand im Staging-Repo:
+
+- Vorhandenes MU-Plugin `wp-content/mu-plugins/adsense-setup.php` wurde nicht dupliziert, sondern angepasst.
+- `/ads.txt`-Auslieferung bleibt unverändert mit `google.com, pub-6440027702756215, DIRECT, f08c47fec0942fa0`.
+- Das AdSense-Script wird nicht mehr direkt statisch im Head geladen.
+- Stattdessen lädt ein Consent-Gated-Loader `pagead2.googlesyndication.com/pagead/js/adsbygoogle.js` erst nach Complianz-Marketing-Consent (`cmplz_marketing=allow` bzw. Complianz-Marketing-Events).
+- PHP-Syntaxprüfung im Staging-Repo erfolgreich: `php -l wp-content/mu-plugins/adsense-setup.php`.
+- Runtime-HTTP-Check über `m00h` zeigte den neuen Loader noch nicht; wahrscheinlich wegen Host-Begrenzung auf Live-Domain und/oder noch fehlender Synchronisation des m11h-Staging-Checkouts zur laufenden m00h-Runtime.
+
+Noch offen vor Live-Rollout:
+
+- Staging-/Runtime-Abgleich herstellen und Frontend lokal über Runtime-Host `m00h` prüfen.
+- Test ohne Marketing-Consent: kein AdSense-Netzwerkrequest.
+- Test nach Marketing-Consent: AdSense-Script wird geladen.
+- Danach Entscheidung über Commit/Push und späteren Release nach Live.
